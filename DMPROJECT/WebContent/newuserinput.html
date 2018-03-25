@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+</head>
+
+<style>
+	input[type=text], select,input[type=number],input[type=email] {
+    width: 20%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+	
+</style>
+<body style="background:lightblue">
+
 <center>
 <form method="post" action="newuserinput.jsp">
 First name:<br>
-<input type="text" name="first_name">
+
+<input type="text" name="first_name" class="form-control">
+
 <br>
 Last name:<br>
 <input type="text" name="last_name">
 <br>
 Adhar Number:<br>
-<input type="int" name="adharno">
+<input type="number" name="adharno">
 <br>
 Email Id:<br>
 <input type="email" name="email">
@@ -24,40 +45,27 @@ gender:<br>
 </select>
 <br><br>
 Age:<br>
-<input type="int" name="age">
+<input type="number" name="age">
 <br><br>
 Address:<br>
-<input type="text" name="address">
+<input type="text" name="address" style="padding:12px 20px">
 <br><br>
 
 Mobile no:<br>
 <input type="text" name="mobile" maxlength="10">
 <br><br>
 
-Annual Salary:<br>
-<input type="int" name="salary">
-<br><br>
-
-Nature of employment:<br>
-<select name="noe">
-  <option value="engineering">Engineering</option>
-  <option value="medical">Medical</option>
-  <option value="accounts">Accounts</option>
-  <option value="arts">Arts</option>
-</select>
-<br><br>
-
-Earners:<br>
-<input type="int" name="earners">
-<br><br>
-
-Dependents:<br>
-<input type="int" name="dependents">
+pincode:<br>
+<input type="number" name="pincode">
 <br><br>
 
 
-<input type="submit" value="submit">
+
+
+<input type="submit" value="submit" style="border-radius:4px;width:20%;padding:10px">
 </form>
 </center>
+
+
 </body>
 </html>
