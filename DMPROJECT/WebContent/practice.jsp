@@ -31,17 +31,37 @@ e.printStackTrace();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+<div id="container" class="container">
 	
+	<center>
 	<form action="practice2.jsp" method="post">
+		
 		<input type="hidden" value="<%=id%>" name="empval"/>
 		<%session.setAttribute("empid", id); %>
 	</form>
-	<form action="fileupload" method="post" enctype="multipart/form-data">
-		Enter file: <input type="file" accept=".xlsx, .xls, .csv" name="input" />
-		<input type="submit" value="submit"/>
+	<div class="panel panel-info" style="width:300px;margin-top:70px">
+	<div class="panel-heading">Upload Data</div>
+	<form>
+	<br>
+		Download Excel File<br>
+		<a href="DownloadFile.jsp" style="padding-top:12px;padding-bottom:15px"download>Download</a><br>
+	
 	</form>
+	
+	<form action="fileupload" method="post" enctype="multipart/form-data">
+		Enter file: <input type="file" accept=".xlsx, .xls, .csv" name="input" style="padding-top:12px;padding-left:45px"/>
+		<button type="submit" class="btn btn-primary mb-2" style="margin-top:12px">Submit</button>
+	</form>
+	</div>
+	</center>
+	
+	</div>
 	
 	<script type="text/javascript">
 		downloadfile()

@@ -110,6 +110,7 @@ Statement st=conn.createStatement();
 
 sendmail(email,email1);
 out.println("Data is successfully inserted!,token sent");
+out.println("<a href='index.html'>Main Menu</a>");
 
 }
 catch(SQLIntegrityConstraintViolationException e) 
@@ -123,4 +124,5 @@ e.printStackTrace();
 }
 
 %>
+
 
