@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="java.sql.*,java.util.*"%>
+    <%@page import="java.sql.*,java.util.*,javax.swing.*"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 String token =request.getParameter("token");
@@ -13,10 +14,27 @@ Statement st=conn.createStatement();
 String sql = "SELECT employeeDimID FROM employeeDim where email_ID  = '" + token+"'";
 
 ResultSet rs = st.executeQuery(sql);
-rs.next();
+//rs.next();
+
+
+if(rs.next())
+{
 id  = rs.getInt("employeedimid");
 System.out.print("ID: " + id+" ");
-
+}
+else
+{
+	id=0;
+	//out.println("Enter correct token");
+	//Thread.sleep(5000);
+	//JOptionPane.showMessageDialog(null, "Java is fun!");
+	
+	 out.println("<script type=\"text/javascript\">");
+   out.println("alert('Enter correct token');");
+   out.println("location='existinguserstoken.html';");
+   out.println("</script>");
+		//response.sendRedirect("existinguserstoken.html");
+}
  rs.close();
 }
 catch(Exception e)
@@ -54,7 +72,7 @@ e.printStackTrace();
 	
 	</form>
 	
-	<form action="fileupload" method="post" enctype="multipart/form-data">
+	<form action="fileupload" method="post" enctype="multipart/form-data" onsubmit="downloadfile()">
 		Enter file: <input type="file" accept=".xlsx, .xls, .csv" name="input" style="padding-top:12px;padding-left:45px"/>
 		<button type="submit" class="btn btn-primary mb-2" style="margin-top:12px">Submit</button>
 	</form>
@@ -66,7 +84,8 @@ e.printStackTrace();
 	<script type="text/javascript">
 		downloadfile()
 		{
-			<%	%>
+			
+			
 		}
 	
 	</script>

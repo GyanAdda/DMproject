@@ -6,7 +6,189 @@ pageEncoding="ISO-8859-1"%>
 <%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
 <%@page import="java.security.*" %>
 
+<%!
+public String cyclic(String str)  
+{  
+    String Newstr=" ";  
+    //System.out.print("Enter the String you want to Encrypt: ");  
+    try {  
 
+    //Scanner in=new Scanner(System.in);  
+    //str=in.nextLine();  
+    for (int i=0;i<str.length();i++)  
+    {  
+        char ch=Character.toLowerCase(str.charAt(i));  
+        switch (ch)  
+        {  
+            case 'a':  
+                Newstr=Newstr+"{";  
+                break;  
+            case 'b':  
+                Newstr=Newstr+"}";  
+                break;  
+            case 'c':  
+                Newstr=Newstr+"#";  
+                break;  
+            case 'd':  
+                Newstr=Newstr+"~";  
+                break;  
+            case 'e':  
+                Newstr=Newstr+"+";  
+                break;  
+            case 'f':  
+                Newstr=Newstr+"-";  
+                break;  
+            case 'g':  
+                Newstr=Newstr+"*";  
+                break;  
+            case 'h':  
+                Newstr=Newstr+"@";  
+                break;  
+            case 'i':  
+                Newstr=Newstr+"/";  
+                break;  
+            case 'j':  
+                Newstr=Newstr+"\\";  
+                break;  
+            case 'k':  
+                Newstr=Newstr+"?";  
+                break;  
+            case 'l':  
+                Newstr=Newstr+"$";  
+                break;  
+            case 'm':  
+                Newstr=Newstr+"!";  
+                break;  
+            case 'n':  
+                Newstr=Newstr+"^";  
+                break;  
+            case 'o':  
+                Newstr=Newstr+"(";  
+                break;  
+            case 'p':  
+                Newstr=Newstr+")";  
+                break;  
+            case 'q':  
+                Newstr=Newstr+"<";  
+                break;  
+            case 'r':  
+                Newstr=Newstr+">";  
+                break;  
+            case 's' :  
+                Newstr=Newstr+"=";  
+                break;  
+            case 't':  
+                Newstr=Newstr+";";  
+                break;  
+            case 'u':  
+                Newstr=Newstr+",";  
+                break;  
+            case 'v' :  
+                Newstr=Newstr+"_";  
+                break;  
+            case 'w':  
+                Newstr=Newstr+"[";  
+                break;  
+            case 'x' :  
+                Newstr=Newstr+"]";  
+                break;  
+            case 'y':  
+                Newstr=Newstr+":";  
+                break;  
+            case 'z' :  
+                Newstr=Newstr+"\"";  
+                break;  
+            case ' ' :  
+                Newstr=Newstr+" ";  
+                break;  
+            case '.':  
+                Newstr=Newstr+'3';  
+                break;  
+            case ',':  
+                Newstr=Newstr+"1";  
+                break;  
+            case '(':  
+                Newstr=Newstr+'4';  
+                break;  
+            case '\"':  
+                Newstr=Newstr+'5';  
+                break;  
+            case ')' :  
+                Newstr=Newstr+"7";  
+                break;  
+            case '?' :  
+                Newstr= Newstr+"2";  
+                break;  
+            case '!':  
+                Newstr= Newstr+"8";  
+                break;  
+            case '-' :  
+                Newstr= Newstr+"6";  
+                break;  
+            case '%' :  
+                Newstr = Newstr+"9";  
+                break;  
+            case '1':  
+                Newstr=Newstr+"r";  
+                break;  
+            case '2':  
+                Newstr=Newstr+"k";  
+                break;  
+            case '3':  
+                Newstr=Newstr+"b";  
+                break;  
+            case '4':  
+                Newstr = Newstr+"e";  
+                break;  
+            case '5':  
+                Newstr = Newstr+"q";  
+                break;  
+            case '6':  
+                Newstr = Newstr+"h";  
+                break;  
+            case '7':  
+                Newstr = Newstr+"u";  
+                break;  
+            case '8' :  
+                Newstr= Newstr+"y";  
+                break;  
+            case '9':  
+                Newstr = Newstr+"w";  
+                break;  
+            case '0':  
+                Newstr = Newstr+"z";  
+                break;  
+             default:  
+                Newstr=Newstr+"0";  
+                break;  
+        }  
+    }  
+    }  
+    catch(Exception ioe)  
+    {  
+        ioe.printStackTrace();  
+    }  
+    return Newstr;  
+}  
+  
+
+%>
+
+
+
+<%!
+	public String anonymize(String name,String type)
+	{
+		switch(type)
+		{
+		case "encryption": return cryptWithMD5(name);
+		case "random": return random(name);
+		case "mask": return cyclic(name);
+		}
+		return "";
+	}
+	
+%>
 
 <%!
 	
@@ -72,14 +254,35 @@ public String cryptWithMD5(String pass){
         
 }
 %>
+<%!
+	public String random(String s)
+	{
+		String s2="";
+		for(int i=0;i<s.length();i++)
+		{
+			Random random = new Random();
+			int index = random.nextInt(25);
+
+			String [] alphabets = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L","M", "N","O","P","Q", "R", "S", "T", "U", "V","W", "X","Y","Z"};
+
+			s2 =s2+ alphabets[index];
+			
+		}
+		return s2;
+	}
+%>
+
+
 
 <%
+String anon=request.getParameter("anonymization");
+
 String first_name=request.getParameter("first_name");
 String last_name=request.getParameter("last_name");
 String name=first_name.concat(last_name);
-name=cryptWithMD5(name);
+name=anonymize(name,anon);
 String panno=request.getParameter("panno");
-panno=cryptWithMD5(panno);
+panno=anonymize(panno,anon);
 char gender=request.getParameter("gender").charAt(0);
 String dob=request.getParameter("dob");
 String address=request.getParameter("address");
@@ -89,7 +292,7 @@ String country=request.getParameter("country");
 int pincode=Integer.parseInt(request.getParameter("pincode"));
 String mobile=(request.getParameter("mobile"));
 String email=request.getParameter("email");
-String email1=cryptWithMD5(email);
+String email1=anonymize(email,anon);
 String marital_status=request.getParameter("marital_status");
 String annual_salary=request.getParameter("annual_salary");
 String designation=request.getParameter("designation");
