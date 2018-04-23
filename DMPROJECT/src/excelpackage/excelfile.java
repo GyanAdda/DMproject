@@ -276,7 +276,7 @@ i=1;
 			System.out.println(datedim);
 			if(l<investmentsurrogate.size())
 			{
-			int k=st.executeUpdate("insert into financialfact(investmetamount,Investmentduration,startdateofinvestment,enddateofinvestment,employeedimid,employerdimid,investmentdimid)values('"+store.get(financial[0])+"','"+store.get(financial[1])+"','"+dateToInt((String)store.get(financial[2]))+"','"+dateToInt((String)store.get(financial[3]))+"','"+employeedimid+"','"+employersurrogate.get(l)+"','"+investmentsurrogate.get(l)+"')");
+			int k=st.executeUpdate("insert into financialfact(investmetamount,Investmentduration,startdateofinvestment,enddateofinvestment,employeedimid,employerdimid,investmentdimid,datedimid)values('"+store.get(financial[0])+"','"+store.get(financial[1])+"','"+dateToInt((String)store.get(financial[2]))+"','"+dateToInt((String)store.get(financial[3]))+"','"+employeedimid+"','"+employersurrogate.get(l)+"','"+investmentsurrogate.get(l)+"','"+dateToInt(datedim)+"')");
 			l++;
 			}
 			System.out.println();
